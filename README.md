@@ -1,16 +1,9 @@
 # flutter_beautiful_app
 
-A new Flutter project.
+Making a flutter app that works on all platforms and resized appropriately for each one
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Things to investigate
+- in playback_bloc:
+- there is a generated file -> not sure how it was originally generated?
+- there are @Freezed segments of code -> what does @Freezed do?
+- some _bloc code is "part" and "part of" -> how does this work?
