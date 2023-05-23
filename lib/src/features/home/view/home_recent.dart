@@ -71,7 +71,7 @@ class HomeRecent extends StatelessWidget {
         itemBuilder: (context, index) {
           final playlist = playlists[index];
           return Padding(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(8),
             child: Clickable(
               onTap: () => GoRouter.of(context).go('/playlists/${playlist.id}'),
               child: SizedBox(
