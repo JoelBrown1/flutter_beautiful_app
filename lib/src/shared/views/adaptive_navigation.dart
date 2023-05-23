@@ -16,28 +16,41 @@ class AdaptiveNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('what is the selected index: ${selectedIndex}');
     return LayoutBuilder(builder: (context, dimens) {
-      return Scaffold(
+      // big screen layout is here
+      if (dimens.maxWidth >= 600) {
+        return Scaffold(
           body: Row(
-        children: [
-          NavigationRail(
-            extended: dimens.maxWidth >= 800,
-            minExtendedWidth: 180,
-            destinations: destinations
-                .map(
-                  (e) => NavigationRailDestination(
-                    icon: e.icon,
-                    label: Text(e.label),
-                  ),
-                )
-                .toList(),
-            selectedIndex: selectedIndex,
-            onDestinationSelected: onDestinationSelected,
+            children: [
+              NavigationRail(
+                extended: dimens.maxWidth >= 800,
+                minExtendedWidth: 180,
+                destinations: destinations
+                    .map(
+                      (e) => NavigationRailDestination(
+                        icon: e.icon,
+                        label: Text(e.label),
+                      ),
+                    )
+                    .toList(),
+                selectedIndex: selectedIndex,
+                onDestinationSelected: onDestinationSelected,
+              ),
+              Expanded(child: child),
+            ],
           ),
-          Expanded(child: child),
-        ],
-      ));
+        );
+      }
+
+      //mobile layout happens here
+      return Scaffold(
+        body: child,
+        bottomNavigationBar: NavigationBar(
+          destinations: destinations,
+          selectedIndex: selectedIndex,
+          onDestinationSelected: onDestinationSelected,
+        ),
+      );
     });
   }
 }
