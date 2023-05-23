@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 extension BreakpointUtils on BoxConstraints {
   bool get isTablet => maxWidth > 730;
@@ -8,7 +9,7 @@ extension BreakpointUtils on BoxConstraints {
 
 extension TypographyUtils on BuildContext {
   ThemeData get theme => Theme.of(this);
-  TextTheme get textTheme => theme.textTheme; // Modify this line
+  TextTheme get textTheme => GoogleFonts.montserratTextTheme(theme.textTheme);
   ColorScheme get colors => theme.colorScheme;
   TextStyle? get displayLarge => textTheme.displayLarge?.copyWith(
         color: colors.onSurface,

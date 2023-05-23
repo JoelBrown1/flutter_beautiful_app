@@ -99,23 +99,35 @@ final appRouter = GoRouter(routes: [
         ),
       ),
     ],
-  )
+  ),
+  for (final route in destinations.skip(3))
+    GoRoute(
+      path: route.route,
+      pageBuilder: (context, state) => MaterialPage(
+        key: _pageKey,
+        child: RootLayout(
+          child: const SizedBox(),
+          currentIndex: destinations.indexOf(route),
+          key: _scaffoldKey,
+        ),
+      ),
+    ),
 ]);
 
 const List<NavigationDestination> destinations = [
   // home
   NavigationDestination(
-    icon: Icon(Icons.arrow_right_alt_rounded),
+    icon: Icon(Icons.home),
     label: 'home',
     route: '/',
   ),
   NavigationDestination(
-    icon: Icon(Icons.arrow_right_rounded),
+    icon: Icon(Icons.playlist_add_check),
     label: 'Playlists',
     route: '/playlists',
   ),
   NavigationDestination(
-    icon: Icon(Icons.arrow_right_rounded),
+    icon: Icon(Icons.people),
     label: 'Artists',
     route: '/artists',
   ),

@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final settings = ValueNotifier(ThemeSettings(
-    sourceColor: Colors.pink,
+    sourceColor: Color(0x6750A4),
     themeMode: ThemeMode.system,
   ));
 
@@ -38,9 +38,13 @@ class _MyAppState extends State<MyApp> {
             child: ValueListenableBuilder<ThemeSettings>(
               valueListenable: settings,
               builder: (context, value, _) {
+                final theme = ThemeProvider.of(context);
                 return MaterialApp.router(
                   debugShowCheckedModeBanner: false,
                   title: 'flutter demo',
+                  theme: theme.light(settings.value.sourceColor),
+                  darkTheme: theme.dark(settings.value.sourceColor),
+                  themeMode: theme.themeMode(),
                   routeInformationParser: appRouter.routeInformationParser,
                   routeInformationProvider: appRouter.routeInformationProvider,
                   routerDelegate: appRouter.routerDelegate,

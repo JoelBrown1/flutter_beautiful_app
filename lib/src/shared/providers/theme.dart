@@ -176,6 +176,10 @@ class ThemeProvider extends InheritedWidget {
     );
   }
 
+  ThemeMode themeMode() {
+    return settings.value.themeMode;
+  }
+
   ThemeData light([Color? targetColor]) {
     final colorScheme = colors(Brightness.light, targetColor);
     return ThemeData.light().copyWith(
