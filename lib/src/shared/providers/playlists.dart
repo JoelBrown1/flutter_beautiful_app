@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'package:english_words/english_words.dart';
-import 'package:flutter_beautiful_app/src/shared/classes/song.dart';
-import 'package:flutter_beautiful_app/src/shared/extensions.dart';
+import 'package:collection/collection.dart';
 
 // classes
+import '../../shared/classes/song.dart';
 import '../classes/playlist.dart';
 import '../classes/image.dart';
+
+import '../../shared/extensions.dart';
 
 import '../providers/artists.dart';
 
@@ -53,6 +55,10 @@ class PlaylistsProvider {
           sourceLink: 'https://unsplash.com/photos/BY_KyTwTKq4',
           sourceName: 'dimitri.photography'),
     ];
+  }
+
+  Playlist? getPlaylist(String id) {
+    return playlists.firstWhereOrNull((playlist) => playlist.id == id);
   }
 
   static Playlist randomPlaylist({int numSongs = 15}) {

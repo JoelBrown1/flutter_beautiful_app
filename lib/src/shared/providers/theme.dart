@@ -26,6 +26,27 @@ class NoAnimationPageTransitionsBuilder extends PageTransitionsBuilder {
   }
 }
 
+class CustomColor {
+  const CustomColor({
+    required this.name,
+    required this.color,
+    this.blend = true,
+  });
+
+  final String name;
+  final Color color;
+  final bool blend;
+
+  Color value(ThemeProvider provider) {
+    return provider.custom(this);
+  }
+}
+
+const linkColor = CustomColor(
+  name: 'link color',
+  color: Color(0xff00b0ff),
+);
+
 class ThemeSettingChange extends Notification {
   ThemeSettingChange({required this.settings});
   final ThemeSettings settings;
@@ -57,6 +78,14 @@ class ThemeProvider extends InheritedWidget {
   Color blend(Color targetColor) {
     return Color(
         Blend.harmonize(targetColor.value, settings.value.sourceColor.value));
+  }
+
+  Color custom(CustomColor custom) {
+    if (custom.blend) {
+      return blend(custom.color);
+    } else {
+      return custom.color;
+    }
   }
 
   Color source(Color? target) {

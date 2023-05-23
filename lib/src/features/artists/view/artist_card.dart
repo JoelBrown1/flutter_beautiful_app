@@ -1,0 +1,91 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_app/src/shared/views/hoverable_song_play_button.dart';
+
+import '../../../shared/extensions.dart';
+
+import '../../../shared/classes/artist.dart';
+import '../../../shared/classes/song.dart';
+import '../../../shared/views/outlined_card.dart';
+
+class ArtistCard extends StatelessWidget {
+  const ArtistCard({
+    super.key,
+    required this.artist,
+  });
+
+  final Artist artist;
+
+  @override
+  Widget build(BuildContext context) {
+    Song nowPlaying = artist.songs[Random().nextInt(artist.songs.length)];
+    return OutlinedCard(
+      child: LayoutBuilder(
+        builder: (context, dimens) => Row(
+          children: [
+            SizedBox(
+              width: dimens.maxWidth * .4,
+              child: Image.asset(
+                artist.image.image,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            artist.name,
+                            style: context.titleMedium,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            artist.bio,
+                            style: context.labelSmall,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (dimens.maxHeight > 100)
+                      Row(
+                        children: [
+                          HoverableSongPlayButton(
+                            size: const Size(50, 50),
+                            song: nowPlaying,
+                            child: Icon(
+                              Icons.play_circle,
+                              color: context.colors.tertiary,
+                            ),
+                          ),
+                          Text(
+                            nowPlaying.title,
+                            style: context.labelMedium,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ],
+                      )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -11,6 +11,9 @@ import './views/root_layout.dart';
 // features/views
 import '../features/home/view/home_screen.dart';
 import '../features/playlists/view/playlist_home_screen.dart';
+import '../features/playlists/view/playlist_screen.dart';
+import '../features/artists/view/artists_screen.dart';
+import '../features/artists/view/artist_screen.dart';
 
 const _pageKey = ValueKey('_pageKey');
 const _scaffoldKey = ValueKey('_scaffoldKey');
@@ -55,6 +58,47 @@ final appRouter = GoRouter(routes: [
         child: PlaylistHomeScreen(),
       ),
     ),
+    routes: [
+      GoRoute(
+        path: ':pid',
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          child: RootLayout(
+            key: _scaffoldKey,
+            currentIndex: 1,
+            child: PlaylistScreen(
+              playlist:
+                  playlistsProvider.getPlaylist(state.pathParameters['pid']!)!,
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+  GoRoute(
+    path: '/artists',
+    pageBuilder: (context, state) => const MaterialPage<void>(
+      key: _pageKey,
+      child: RootLayout(
+        child: ArtistsScreen(),
+        currentIndex: 2,
+      ),
+    ),
+    routes: [
+      GoRoute(
+        path: ':pid',
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          child: RootLayout(
+            key: _scaffoldKey,
+            currentIndex: 2,
+            child: ArtistScreen(
+              artist: artistsProvider.getArtist(state.pathParameters['pid']!)!,
+            ),
+          ),
+        ),
+      ),
+    ],
   )
 ]);
 
