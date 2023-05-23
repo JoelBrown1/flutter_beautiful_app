@@ -19,6 +19,7 @@ class HomeRecent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('my code what is the axis: ${axis}');
     if (axis == Axis.horizontal) {
       return SizedBox(
         height: 295,

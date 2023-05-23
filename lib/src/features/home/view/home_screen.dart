@@ -69,7 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    HomeRecent(playlists: playlists),
+                    HomeRecent(
+                      playlists: playlists,
+                      axis: Axis.vertical,
+                    ),
                     PlaylistSongs(playlist: topSongs, constraints: constraints),
                     PlaylistSongs(
                         playlist: newReleases, constraints: constraints),
