@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_app/src/shared/views/hover_toggle.dart';
+import 'package:flutter_beautiful_app/src/shared/views/hoverable_song_play_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../shared/extensions.dart';
@@ -44,14 +46,16 @@ class PlaylistSongs extends StatelessWidget {
       rowBuilder: (context, index) => DataRow.byIndex(
         index: index,
         cells: [
-          DataCell(
-            Center(
+          DataCell(HoverableSongPlayButton(
+            hoverMode: HoverMode.overlay,
+            song: playlist.songs[index],
+            child: Center(
               child: Text(
                 (index + 1).toString(),
                 textAlign: TextAlign.center,
               ),
             ),
-          ),
+          )),
           DataCell(
             Row(
               children: [
